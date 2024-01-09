@@ -53,6 +53,9 @@ class Stock:
         self.conditionnement = conditionnement
         self.adresse_image = adresse_image
         self.visibility = visibility
+        
+    def getDescription(self):
+        return self.description
     
     def modifier_produit(self, id_article: int, product_name: str, description: str, quantite: int, prix: int, conditionnement: str, adresse_image: str, visibility: bool):
         """
