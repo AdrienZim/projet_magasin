@@ -29,7 +29,7 @@ class StockApp:
         self.tree.heading("Produit", text="Produit", command=lambda: self.sort_column("Produit"))
         self.tree.heading("Description", text="Description")
         self.tree.heading("Quantité", text="Quantité")
-        self.tree.heading("Prix", text="Prix", command=lambda: self.sort_column("Prix"))
+        self.tree.heading("Prix", text="Prix")
         self.tree.heading("Conditionnement", text="Conditionnement")
         
         # Définition des tailles de certaines colonnes
@@ -45,6 +45,10 @@ class StockApp:
 
         # Utilisez et placez pack pour ajuster le Treeview à la fenêtre
         self.tree.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        
+        # Ajoutez un bouton en dessous du Treeview
+        self.button = tk.Button(root, text="Panier", command=self.ouverture_panier)
+        self.button.pack(pady=10)
 
     def update_stock(self):
         # Effacez les données existantes dans le Treeview
@@ -82,6 +86,10 @@ class StockApp:
         for i, item in enumerate(data):
             # Reconfigurez les éléments du Treeview dans l'ordre trié
             self.tree.move(item[1], "", i)
+            
+    def ouverture_panier(self):
+        # Fonction associée au bouton pour envoyer un message dans la console
+        print("Message envoyé depuis le bouton. => Ouverture d'une fenêtre contenant le panier de ?")
 
 def main_client():
     root = tk.Tk()

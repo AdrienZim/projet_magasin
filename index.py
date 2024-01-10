@@ -11,7 +11,7 @@ import sys
 
 # Imports des fichiers de Classe
 from classes.class_stock import *
-from interfaces.client_affichage_stock import *
+from interfaces.client_affichage_stock import main_client
 
 # Fonction de chargement du CSV
 assert importer(csv_import) == True, "L'importation du stock contient une erreur de chargement."
