@@ -11,6 +11,7 @@ import sys
 
 # Imports des fichiers de Classe
 from classes.class_stock import *
+from interfaces.client_affichage_stock import *
 
 # Fonction de chargement du CSV
 assert importer(csv_import) == True, "L'importation du stock contient une erreur de chargement."
@@ -21,7 +22,8 @@ def action(event):
     select = menu_choix_interface.get()
     
     if select == "Client":
-        print(None)
+        app.destroy()
+        main_client()
     
     if select == "Gestionnaire du stock":
         print(None)
@@ -33,6 +35,7 @@ def action(event):
 
 # Création de la page Tkinter et définition de sa taille
 app = tk.Tk()
+app.title("Choix de l'interface")
 app.geometry('900x600')
 
 # Choix de l'interface et définition du menu sur "Client" par défault
