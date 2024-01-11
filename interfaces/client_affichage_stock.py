@@ -96,7 +96,7 @@ class StockApp:
 
 def main_client():
     root = tk.Tk()
-    app = StockApp(root)
+    StockApp(root)
     root.mainloop()
 
 if __name__ == "__main__":
