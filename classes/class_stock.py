@@ -54,8 +54,29 @@ class Stock:
         self.adresse_image = adresse_image
         self.visibility = visibility
         
+    def getId(self):
+        return self.id
+    
+    def getName(self):
+        return self.name
+        
     def getDescription(self):
         return self.description
+    
+    def getQuantite(self):
+        return self.quantite
+    
+    def getPrix(self):
+        return self.prix
+    
+    def getConditionnement(self):
+        return self.conditionnement
+    
+    def getAdresseImage(self):
+        return self.adresse_image
+    
+    def getVisibility(self):
+        return self.visibility
     
     def modifier_produit(self, id_article: int, product_name: str, description: str, quantite: int, prix: int, conditionnement: str, adresse_image: str, visibility: bool):
         """

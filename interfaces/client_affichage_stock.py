@@ -11,6 +11,7 @@ from tkinter import ttk
 
 # Import des différents fichiers :
 from classes.class_stock import stock
+from interfaces.affichage_article import affichage_article
 
 class StockApp:
     def __init__(self, root):
@@ -22,7 +23,7 @@ class StockApp:
         self.stock_data = []
         for element in stock:
             if stock[element].visibility == True :
-                self.stock_data.append((stock[element].name, stock[element].description, stock[element].quantite, f"{stock[element].prix} €", stock[element].conditionnement))
+                self.stock_data.append((stock[element].getName(), stock[element].getDescription(), stock[element].getQuantite(), f"{stock[element].getPrix()} €", stock[element].getConditionnement()))
         
         # Créez un Treeview pour afficher le stock
         self.tree = ttk.Treeview(root, columns=("Produit", "Description", "Quantité", "Prix", "Conditionnement"), show="headings")
@@ -72,6 +73,8 @@ class StockApp:
 
         # Vérifiez s'il y a une sélection
         if item:
+            # Affichage du détails de l'article
+            affichage_article()
             # Récupérez les valeurs de la ligne sélectionnée
             values = self.tree.item(item, "values")
             print(values[0] + " Ouverture tkinter Clément")
