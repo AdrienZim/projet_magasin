@@ -10,8 +10,8 @@ import tkinter as tk
 from tkinter import ttk
 
 # Import des différents fichiers :
-from classes.class_stock import stock
-from interfaces.affichage_article import affichage_article
+from classes.class_stock import stock, search_num_article
+from interfaces.client_affichage_article import affichage_article
 
 class StockApp:
     def __init__(self, root):
@@ -73,11 +73,9 @@ class StockApp:
 
         # Vérifiez s'il y a une sélection
         if item:
-            # Affichage du détails de l'article
-            affichage_article()
-            # Récupérez les valeurs de la ligne sélectionnée
+            # Affichage du détails de l'article et Récupération des valeurs de la ligne sélectionnée
             values = self.tree.item(item, "values")
-            print(values[0] + " Ouverture tkinter Clément")
+            affichage_article(search_num_article(values[0]))
     
     def sort_column(self, column):
         # Obtenez les données actuelles du Treeview

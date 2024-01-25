@@ -1,4 +1,11 @@
-# SOUS LA FORME {num_panier:[num_client,[[num_article,prix,quantité],[num_article,prix,quantité]],total]}
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jan 25 09:16:59 2024
+
+@author: douchinap
+"""
+
+# SOUS LA FORME {num_panier:[num_client,[[num_article,prix,quantite],[num_article,prix,quantite]],total]}
 # panier = {69:[2,[[5,2,3],[2,4,6]]]}
 
 
@@ -19,6 +26,7 @@ class Panier():
 
     def dico(self):
         P = {self.num_panier:[self.num_client,self.contenu]}
+        P[self.num_panier].append(prix_total(P, self.num_panier))
         return P
     
     def ajout(self,nouvel_article):
@@ -35,6 +43,11 @@ class Panier():
         P[self.num_panier].append(t)
         assert n < len(P[self.num_panier][1])
         return P
+
+
+###################################################################
+######################### Tests unitaires #########################
+###################################################################
 
 panier = Panier(69,2,[[5,2,3],[2,4,6]])
 # print(panier.ajout([6,99,2]))

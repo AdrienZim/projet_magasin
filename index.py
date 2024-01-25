@@ -45,7 +45,6 @@ menu_choix_interface = ttk.Combobox(app, values = interfaces_possibles)
 # menu_choix_interface.current(0)
 
 
-
 # Affichages dans l'interface
 labelChoix.pack()
 menu_choix_interface.pack()

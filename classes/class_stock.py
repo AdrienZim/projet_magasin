@@ -269,6 +269,23 @@ def exporter(fichier_csv: str, contenu: dict) -> bool:
         objet.writerows(table_valide)
         return True
 
+def search_num_article(nom: str) -> int:
+    """
+    Fonction pour rechercher un numéro d'article dans le dictionnaire stock
+
+    Parameters
+    ----------
+    nom : str
+        Nom de l'article à rechercher dans le dictionnaire stock.
+
+    Returns
+    -------
+    int
+        Numéro de l'article dans le dictionnaire stock.
+    """
+    for element in stock:
+        if stock[element].getName() == nom:
+            return stock[element].getId()
 
 
 ###################################################################
