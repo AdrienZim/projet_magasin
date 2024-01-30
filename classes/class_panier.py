@@ -3,11 +3,14 @@
 Created on Thu Jan 25 09:16:59 2024
 
 @author: douchinap
-"""
 
-# SOUS LA FORME {num_panier:[num_client,[[num_article,prix,quantite],[num_article,prix,quantite]],total]}
+"""
+import csv
+
+# SOUS LA FORME {num_panier:[num_client,[[num_article,prix,quantitÈ],[num_article,prix,quantitÈ]],total]}
 # panier = {69:[2,[[5,2,3],[2,4,6]]]}
 
+stockage_panier = []
 
 def prix_total(panier,num_panier):
     total = 0
@@ -16,11 +19,37 @@ def prix_total(panier,num_panier):
     return total
 
 
+"""
+Actualisation des parametres de numéro de commande
+--------------------------------------------------------------------
+"""
 
+def actualisation():    
+    inter_parametre = {}
+    with open('./classes/Parametre.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=';')
+        for row in reader:
+            for e in row :
+                inter_parametre[e]=int(row[e])
+                
+    inter_parametre['Dernier_num_panier'] += 1
+    numero = inter_parametre['Dernier_num_panier']
+    
+    with open('./classes/Parametre.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=';')
+        K =list(inter_parametre.keys())
+        writer.writerow(K)
+        V =list(inter_parametre.values())
+        writer.writerow(V)
+    return numero
+
+"""
+--------------------------------------------------------------------
+"""
 
 class Panier():
-    def __init__(self,num_panier,num_client,contenu):
-        self.num_panier = num_panier
+    def __init__(self,num_client,contenu):
+        self.num_panier = actualisation()
         self.num_client = num_client
         self.contenu = contenu
 
@@ -30,17 +59,17 @@ class Panier():
         return P
     
     def ajout(self,nouvel_article):
-        P = panier.dico()
+        P = self.dico()
         P[self.num_panier][1].append(nouvel_article)
-        t = prix_total(panier.dico(), self.num_panier)
-        P[self.num_panier].append(t)
+        t = prix_total(self.dico(), self.num_panier)
+        P[self.num_panier][-1] = t
         return P
         
     def suppr(self,n):
-        P = panier.dico()
+        P = self.dico()
         del P[self.num_panier][1][n-1]
-        t = prix_total(panier.dico(), self.num_panier)
-        P[self.num_panier].append(t)
+        t = prix_total(self.dico(), self.num_panier)
+        P[self.num_panier][-1] = t
         assert n < len(P[self.num_panier][1])
         return P
 
@@ -49,6 +78,6 @@ class Panier():
 ######################### Tests unitaires #########################
 ###################################################################
 
-panier = Panier(69,2,[[5,2,3],[2,4,6]])
+# panier = Panier(2,[[5,2,3],[2,4,6]])
 # print(panier.ajout([6,99,2]))
 # print(panier.suppr(1))

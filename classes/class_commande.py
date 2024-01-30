@@ -7,8 +7,11 @@ Created on Tue Dec 12 20:17:34 2023
 
 # Imports des différents fichiers de classe nécessaire ainsi que du module CSV
 import csv
-from class_stock import *
+from class_stock import stock
 from class_panier import *
+
+fichier_parametre = "./classes/Parametre.csv"
+fichier_historique = "./classes/historique.csv"
 
 panier_base = Panier(69,3,[[1,3.5,2],[2,2,4],[9,9,9],[9,9,9]])
 panier = panier_base.dico()
@@ -19,16 +22,16 @@ Actualisation des parametre de numéro de commande
 """
 def actualisation():    
     inter_parametre = {}
-    with open('Parametre.csv', newline='') as csvfile:
+    with open(fichier_parametre, newline='') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         for row in reader:
             for e in row :
                 inter_parametre[e]=int(row[e])
-                
+
     inter_parametre['Dernier_num_commande'] += 1
     numero = inter_parametre['Dernier_num_commande']
     
-    with open('Parametre.csv', 'w', newline='') as csvfile:
+    with open(fichier_parametre, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=';')
         K =list(inter_parametre.keys())
         writer.writerow(K)
@@ -77,7 +80,7 @@ class commande :
         Premiere ouverture du csv, récupération de l'historique de commande et stockage de celui-ci dans un dictionnaire inter_historique
         décompte par n du nombre de commande de l'historique à sa récupération
         """
-        with open('historique.csv', newline='') as csvfile:
+        with open(fichier_historique, newline='') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=';')
             for row in reader:
                 for e in row:
@@ -90,7 +93,7 @@ class commande :
         Ouverture du csv pour l'écriture
         mise en place des colonnes 'identifiant_de_commande' et 'prix_total', ainsi que décision du nombre de colonnes articles (sous la forme a1, a2, etc) à ajouter en fonction de la plus longues commande de l'historique et de la commande à ajouter
         """ 
-        with open('historique.csv', 'w', newline='') as csvfile:
+        with open(fichier_historique, 'w', newline='') as csvfile:
             fieldnames = ['identifiant_de_commande', 'prix_total']
            
             if len(inter_historique)-2 > len(c[list(c.keys())[0]][0]):
