@@ -12,6 +12,7 @@ from tkinter import ttk
 # Import des différents fichiers :
 from classes.class_stock import stock, search_num_article
 from interfaces.client_affichage_article import affichage_article
+from interfaces.client_affichage_panier import main_panier
 
 class StockApp:
     def __init__(self, root):
@@ -89,8 +90,9 @@ class StockApp:
             self.tree.move(item[1], "", i)
             
     def ouverture_panier(self):
+        main_panier()
         # Fonction associée au bouton pour envoyer un message dans la console
-        print("Message envoyé depuis le bouton. => Ouverture d'une fenêtre contenant le panier de ?")
+        # print("Message envoyé depuis le bouton. => Ouverture d'une fenêtre contenant le panier de ?")
 
 def main_client():
     root = tk.Tk()
