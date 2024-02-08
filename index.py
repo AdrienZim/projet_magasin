@@ -36,8 +36,8 @@ def connect_to_database(host, username, password, database):
 
 # Paramètres de connexion à la base de données
 host = "jp2.dmsv-manche.fr"
-username = "michelra"
-password = "Soky8390"
+username = ""
+password = ""
 database = "magasin_sql"
 
 # Connexion à la base de données
