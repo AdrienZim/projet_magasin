@@ -8,6 +8,52 @@ Created on Tue Dec 19 12:22:14 2023
 import tkinter as tk
 from tkinter import ttk
 import sys
+import mysql.connector
+
+print("version mysql :", mysql.connector.__version__)
+
+# Connexion à la base de donnée
+
+def connect_to_database(host, username, password, database):
+    try:
+        # Connexion à la base de données MySQL
+        conn = mysql.connector.connect(
+            host = host,
+            user = username,
+            password = password,
+            database = database
+        )
+        
+        if conn.is_connected():
+            print("Connecté à la base de données")
+            return conn
+        else:
+            print("Impossible de se connecter à la base de données")
+            return None
+    except mysql.connector.Error as e:
+        print("Erreur de connexion à la base de données:", e)
+        return None
+
+# Paramètres de connexion à la base de données
+host = "jp2.dmsv-manche.fr"
+username = "michelra"
+password = "Soky8390"
+database = "magasin_sql"
+
+# Connexion à la base de données
+connexion = connect_to_database(host, username, password, database)
+
+# Utilisation de la connexion
+# Par exemple, pour exécuter une requête SQL :
+# cursor = connexion.cursor()
+# cursor.execute("SELECT * FROM votre_table")
+# for row in cursor:
+#     print(row)
+# cursor.close()
+
+# N'oubliez pas de fermer la connexion lorsque vous avez fini :
+# connexion.close()
+
 
 # Imports des fichiers de Classe
 from classes.class_stock import *
@@ -30,6 +76,7 @@ def action(event):
     
     if select == "Fermeture" :
         app.destroy()
+        connexion.close()
         sys.exit("Fermeture de l'interface")
 
 
